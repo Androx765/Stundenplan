@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag & Drop Stundenplan</title>
+  <script src="https://unpkg.com/mithril/mithril.js"></script>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    .schedule {
+        display: grid;
+        grid-template-columns: 1fr 3fr; /* Zwei Spalten: Zeit + Einträge */
+        grid-auto-rows: auto; /* Jede Zeile hat automatische Höhe */
+        gap: 5px; /* Abstand zwischen den Zeilen */
+        background: #f4f4f4;
+        border: 1px solid #ddd;
+        max-width: 600px; /* Optional: Begrenzte Breite */
+        margin: auto; /* Zentriere die Timeline */
+    }
+    .time-slot {
+        display: contents; /* Ermöglicht, dass die Zeit- und Inhaltsspalten in der Grid-Struktur aufgeteilt werden */
+    }
+    .time {
+        text-align: right;
+        padding: 10px;
+        font-weight: bold;
+        border-right: 1px solid #ddd; /* Trennlinie */
+    }
+    .current-time > .time,
+    .current-time > .slot-content {
+        background-color: rgba(255, 235, 59, 0.2);
+        border: 2px solid #ffeb3b;
+    }
+    .slot-content {
+        display: flex;
+        flex-direction: column; /* Einträge untereinander */
+        gap: 5px; /* Abstand zwischen Einträgen */
+    }
+
+    .entry {
+        flex: 1; /* Nimmt die gesamte Breite ein */
+        width: 100%; /* Sicherheitshalber für die Breite */
+        padding: 10px;
+        background-color: #28a745; /* Standardfarbe für Eintrag */
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        box-sizing: border-box; /* Einschließen von Padding in die Breite */
+    }
+
+    .entry[data-type="uni"] {
+        background: #007bff;
+        color: #fff;
+    }
+    .entry[data-type="break"] {
+        background: #28a745;
+        color: #fff;
+    }
+    .entry[data-type="hobby"] {
+        background: #c927e6;
+        color: #fff;
+    }
+    .entry[data-type="sport"] {
+        background: #f97f0d;
+        color: #fff;
+    }
+  
+    /* Drag-and-Drop optisches Feedback */
+    .slot-content.drag-over {
+        background-color: rgba(0, 123, 255, 0.2);
+        border: 2px dashed #007bff;
+    }
+  </style>  
+</head>
+<body>
+  <h1>Stundenplan</h1>
+  <div id="app"></div>
+  <script src="script.js"></script>
+</body>
+</html>
